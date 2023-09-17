@@ -43,6 +43,26 @@ class BinaryTree {
     }
   }
 
+  search(value: number): number | null  {
+    return this.searchNode(this.root, value);
+  }
+
+  private searchNode(node: TreeNode | null, value: number): number | null {
+    if (node === null) {
+      return null;
+    }
+
+    if (node.value === value) {
+      return node.value;
+    }
+
+    if (value < node.value) {
+      return this.searchNode(node.left, value);
+    } else {
+      return this.searchNode(node.right, value);
+    }
+  }
+
   inorderTraversal(node: TreeNode | null = this.root, result: number[] = []): number[] {
     if (node !== null) {
       this.inorderTraversal(node.left, result);
@@ -69,6 +89,9 @@ const binaryTree = new BinaryTree();
 for (const num of arrayToSort) {
   binaryTree.insert(num);
 }
+
+const searchResult = binaryTree.search(2);
+console.log(searchResult);
 
 const sortedArray = binaryTree.inorderTraversal();
 console.log(sortedArray);
